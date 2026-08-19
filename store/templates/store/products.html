@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products | BartanCraft</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #111827;
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f59e0b;
+        }
+
+        .cart-btn {
+            background: #f59e0b;
+            color: #111827 !important;
+
+            padding: 10px 17px;
+
+            border-radius: 8px;
+        }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+
+            padding: 65px 20px 45px;
+
+            background:
+                linear-gradient(135deg,
+                    #fff7ed,
+                    #fef3c7);
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #ea580c;
+        }
+
+        .hero p {
+            color: #6b7280;
+            font-size: 17px;
+        }
+
+        /* PRODUCTS */
+
+        .container {
+            max-width: 1250px;
+
+            margin: 45px auto;
+
+            padding: 0 20px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+        }
+
+        .section-heading p {
+            color: #6b7280;
+        }
+
+        .product-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 25px;
+        }
+
+        /* CARD */
+
+        .product-card {
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.07);
+
+            transition: 0.3s;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* IMAGE */
+
+        .image-box {
+            height: 240px;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .no-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 16px;
+        }
+
+        /* CONTENT */
+
+        .product-content {
+            padding: 20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 20px;
+
+            margin-bottom: 9px;
+
+            color: #111827;
+        }
+
+        .description {
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 15px;
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 2;
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+        .price {
+            font-size: 22px;
+
+            font-weight: 800;
+
+            color: #ea580c;
+
+            margin-bottom: 8px;
+        }
+
+        .stock {
+            color: #059669;
+
+            background: #ecfdf5;
+
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 15px;
+
+            width: fit-content;
+        }
+
+        .out-stock {
+            background: #fef2f2;
+
+            color: #dc2626;
+        }
+
+        /* BUTTON */
+
+        .details-btn {
+            display: block;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            margin-top: auto;
+
+            transition: 0.3s;
+        }
+
+        .details-btn:hover {
+            background: #f59e0b;
+
+            color: #111827;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+
+            padding: 80px 20px;
+
+            background: white;
+
+            border-radius: 15px;
+        }
+
+        .empty h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #6b7280;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 70px;
+
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+        footer p {
+            color: #9ca3af;
+
+            margin-top: 5px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1050px) {
+
+            .product-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .navbar {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .product-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 14px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'store:home' %}" class="logo">
+            Bartan<span>Craft</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'store:home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'store:products' %}">
+                Products
+            </a>
+            <a href="{% url 'store:my_orders' %}">
+                📦 My Orders
+            </a>
+
+            <a href="{% url 'store:cart' %}" class="cart-btn">
+                🛒 Cart
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h1>
+            Explore Our <span>Products</span>
+        </h1>
+
+        <p>
+            Quality kitchenware made for every home.
+        </p>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+
+    <main class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    🛍️ All Products
+                </h2>
+
+                <p>
+                    Choose your favourite kitchen essentials
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if products %}
+
+        <div class="product-grid">
+
+            {% for product in products %}
+
+            <div class="product-card">
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="image-box">
+
+                    {% if product.image %}
+
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+
+                    {% else %}
+
+                    <div class="no-image">
+                        🍽️
+                        <span>No Image</span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- PRODUCT CONTENT -->
+
+                <div class="product-content">
+
+                    <h3 class="product-name">
+                        {{ product.name }}
+                    </h3>
+
+
+                    <p class="description">
+                        {{ product.description }}
+                    </p>
+
+
+                    <div class="price">
+                        ₹{{ product.price }}
+                    </div>
+
+
+                    {% if product.stock > 0 %}
+
+                    <div class="stock">
+                        ✓ In Stock ({{ product.stock }})
+                    </div>
+
+                    {% else %}
+
+                    <div class="stock out-stock">
+                        ✕ Out of Stock
+                    </div>
+
+                    {% endif %}
+
+
+                    <a href="{% url 'store:product_detail' product.id %}" class="details-btn">
+                        View Details →
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+
+            <h2>
+                No Products Available
+            </h2>
+
+            <p>
+                Products will appear here once added.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            BartanCraft
+        </strong>
+
+        <p>
+            Quality Kitchenware for Every Home 🍽️
+        </p>
+
+        <p>
+            © 2026 BartanCraft. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

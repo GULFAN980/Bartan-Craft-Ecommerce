@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Successful | BartanCraft</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-card {
+            width: 90%;
+            max-width: 600px;
+
+            background: white;
+
+            padding: 50px 35px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.10);
+        }
+
+        .success-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #059669;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .order-number {
+            background: #f3f4f6;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin: 25px 0;
+
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 13px 24px;
+
+            background: #111827;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #374151;
+        }
+
+        .home-btn {
+            background: #f59e0b;
+            color: #111827;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="success-card">
+
+    <div class="success-icon">
+        ✅
+    </div>
+
+    <h1>
+        Order Placed Successfully!
+    </h1>
+
+    <p>
+        Thank you for shopping with BartanCraft.
+        Your order has been successfully recorded.
+    </p>
+
+
+    <div class="order-number">
+
+        Order ID:
+        #{{ order.id }}
+
+        <br>
+
+        Total Amount:
+        ₹{{ order.total_amount }}
+
+    </div>
+
+
+    <a
+        href="{% url 'store:products' %}"
+        class="btn"
+    >
+        Continue Shopping
+    </a>
+
+
+    <a
+        href="{% url 'store:home' %}"
+        class="btn home-btn"
+    >
+        Go to Home
+    </a>
+
+</div>
+
+
+</body>
+
+</html>

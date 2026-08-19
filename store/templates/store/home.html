@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BartanCraft - Premium Utensils</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #172033;
+        }
+
+        /* =========================
+   NAVBAR
+========================= */
+
+        .navbar {
+            width: 100%;
+            min-height: 70px;
+
+            background: #111827 !important;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 16px 7%;
+
+            position: relative;
+            z-index: 1000;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            color: #ffffff !important;
+            font-size: 27px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #f59e0b !important;
+        }
+
+
+        /* NAVIGATION */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        /* NORMAL LINKS */
+
+        .nav-links a {
+            color: #ffffff !important;
+            text-decoration: none;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            padding: 9px 13px;
+            border-radius: 7px;
+
+            transition: all 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f59e0b !important;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+
+        /* USER NAME */
+
+        .user-name {
+            color: #ffffff !important;
+            font-size: 14px;
+            font-weight: 600;
+
+            padding: 9px 5px;
+        }
+
+
+        /* LOGIN */
+
+        .login-btn {
+            background: #1f2937 !important;
+            color: #ffffff !important;
+
+            border: 1px solid #374151;
+        }
+
+        .login-btn:hover {
+            background: #374151 !important;
+            color: #f59e0b !important;
+            border-color: #f59e0b;
+        }
+
+
+        /* REGISTER */
+
+        .register-btn {
+            background: #f59e0b !important;
+            color: #111827 !important;
+
+            border: 1px solid #f59e0b;
+        }
+
+        .register-btn:hover {
+            background: #fbbf24 !important;
+            color: #111827 !important;
+        }
+
+
+        /* LOGOUT */
+
+        .logout-btn {
+            background: #1f2937 !important;
+            color: #ffffff !important;
+
+            border: 1px solid #374151;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626 !important;
+            border-color: #dc2626;
+            color: #ffffff !important;
+        }
+
+
+        /* CART */
+
+        .nav-links a[href*="cart"] {
+            color: #ffffff !important;
+        }
+
+        .nav-links a[href*="cart"]:hover {
+            color: #f59e0b !important;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 18px 5%;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: linear-gradient(135deg, #101a2c, #1d2b42);
+            min-height: 470px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 70px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 107, 26, 0.12);
+            border-radius: 50%;
+            top: -120px;
+            right: -80px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 107, 26, 0.14);
+            border: 1px solid rgba(255, 107, 26, 0.4);
+            color: #ff9a5c;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 52px;
+            line-height: 1.12;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #ff6b1a;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 680px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #ff6b1a;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .btn-primary:hover {
+            background: #e9570b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border: 1px solid #718096;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .btn-secondary:hover {
+            border-color: #ff6b1a;
+            color: #ff6b1a;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            background: #ffffff;
+            padding: 55px 7%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .feature {
+            padding: 25px;
+            border-radius: 14px;
+            transition: 0.25s;
+        }
+
+        .feature:hover {
+            background: #f8fafc;
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 14px;
+        }
+
+        .feature h3 {
+            font-size: 17px;
+            margin-bottom: 9px;
+        }
+
+        .feature p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* ================= PRODUCTS ================= */
+
+        .products-section {
+            background: #eef1f5;
+            padding: 70px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-heading h2 {
+            font-size: 32px;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .section-heading p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.08);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.15);
+        }
+
+        .product-image {
+            height: 190px;
+            background: #e7ebf0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 58px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+            min-height: 40px;
+            margin-bottom: 14px;
+        }
+
+        .price {
+            color: #ff5b0a;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .stock {
+            color: #16a34a;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .details-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #0d1626;
+            color: white;
+            padding: 10px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .details-btn:hover {
+            background: #ff6b1a;
+        }
+
+        .product-image-box {
+            width: 100%;
+            height: 230px;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .no-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 15px;
+        }
+
+        .no-image:first-child {
+            font-size: 45px;
+        }
+
+
+        /* ================= WHY US ================= */
+
+        .why-us {
+            background: #101a2c;
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .why-us h2 {
+            font-size: 30px;
+            margin-bottom: 14px;
+        }
+
+        .why-us p {
+            max-width: 700px;
+            margin: auto;
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #080f1c;
+            color: #94a3b8;
+            text-align: center;
+            padding: 22px;
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 5%;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 430px;
+                padding: 50px 20px;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-section {
+                padding: 50px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a href="{% url 'store:home' %}" class="logo">
+            Bartan<span>Craft</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'store:home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'store:products' %}">
+                Products
+            </a>
+
+            <a href="{% url 'store:cart' %}">
+                🛒 Cart
+            </a>
+
+            {% if user.is_authenticated %}
+
+            <span class="user-name">
+                Hi, {{ user.username }}
+            </span>
+
+            <a href="{% url 'store:logout' %}" class="auth-btn logout-btn">
+                Logout
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'store:login' %}" class="auth-btn login-btn">
+                Login
+            </a>
+
+            <a href="{% url 'store:register' %}" class="auth-btn register-btn">
+                Register
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                ✦ Daily Kitchen Essentials
+            </div>
+
+            <h1>
+                Premium Utensils
+                <span>For Every Kitchen</span>
+            </h1>
+
+            <p>
+                Discover durable, stylish and affordable kitchen utensils
+                made for everyday cooking. Quality products from
+                BartanCraft, made for your home.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/products/" class="btn-primary">
+                    Shop Products →
+                </a>
+
+                <a href="/about/" class="btn-secondary">
+                    About Us
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <div class="feature">
+            <div class="feature-icon">🏅</div>
+            <h3>Quality Products</h3>
+            <p>
+                Carefully selected kitchen essentials
+                for everyday use.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">💰</div>
+            <h3>Affordable Prices</h3>
+            <p>
+                Useful products at reasonable and
+                customer-friendly prices.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🚚</div>
+            <h3>Easy Shopping</h3>
+            <p>
+                Browse products, add them to cart
+                and place your order easily.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+
+        <div class="section-heading">
+            <h2>Featured Products</h2>
+            <p>Some of our popular kitchen essentials</p>
+        </div>
+
+        <div class="product-grid">
+
+            {% for product in products %}
+
+            <div class="product-card">
+
+                <div class="product-image-box">
+
+                    {% if product.image %}
+
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+
+                    {% else %}
+
+                    <div class="no-image">
+                        🍽️
+                        <span>No Image</span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>{{ product.name }}</h3>
+
+                    <p class="product-description">
+                        {{ product.description }}
+                    </p>
+
+                    <div class="price">
+                        ₹{{ product.price }}
+                    </div>
+
+                    <div class="stock">
+                        ✓ In Stock ({{ product.stock }})
+                    </div>
+
+                    <a href="{% url 'store:product_detail' product.id %}" class="details-btn">
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <p style="text-align:center; grid-column:1/-1;">
+                No products available yet.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- WHY BARTANCRAFT -->
+    <section class="why-us">
+
+        <h2>Why Choose BartanCraft?</h2>
+
+        <p>
+            BartanCraft is a simple online store focused on providing
+            useful kitchen and household utensils at affordable prices.
+            We aim to make everyday kitchen shopping simple,
+            convenient and reliable.
+        </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 BartanCraft. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>

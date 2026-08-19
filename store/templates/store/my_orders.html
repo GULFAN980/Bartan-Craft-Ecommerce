@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Orders | BartanCraft</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
+
+        .navbar {
+            background: #111827;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #f59e0b;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #6b7280;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 18px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .order-id {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .status {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .info-box small {
+            display: block;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .info-box strong {
+            font-size: 17px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: #f59e0b;
+            color: #111827;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .view-btn:hover {
+            background: #fbbf24;
+        }
+
+        .empty {
+            background: white;
+            padding: 70px 20px;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            margin-top: 70px;
+            background: #111827;
+            color: #9ca3af;
+            text-align: center;
+            padding: 30px;
+        }
+
+        @media(max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr;
+            }
+
+            .order-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a
+        href="{% url 'store:home' %}"
+        class="logo"
+    >
+        Bartan<span>Craft</span>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="{% url 'store:home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'store:products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'store:cart' %}">
+            🛒 Cart
+        </a>
+
+        <a href="{% url 'store:logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="heading">
+
+        <h1>
+            📦 My Orders
+        </h1>
+
+        <p>
+            View and track all your orders.
+        </p>
+
+    </div>
+
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+            <div class="order-card">
+
+                <div class="order-top">
+
+                    <div class="order-id">
+                        Order #{{ order.id }}
+                    </div>
+
+                    <div class="status">
+                        ✓ Order Placed
+                    </div>
+
+                </div>
+
+
+                <div class="order-info">
+
+                    <div class="info-box">
+
+                        <small>
+                            Customer
+                        </small>
+
+                        <strong>
+                            {{ order.customer_name }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <small>
+                            Total Amount
+                        </small>
+
+                        <strong>
+                            ₹{{ order.total_amount }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <small>
+                            Order Date
+                        </small>
+
+                        <strong>
+                            {{ order.created_at|date:"d M Y" }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="{% url 'store:order_detail' order.id %}"
+                    class="view-btn"
+                >
+                    View Order Details →
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h2>
+                No Orders Yet
+            </h2>
+
+            <p style="margin: 12px 0 25px; color: #6b7280;">
+                You haven't placed any orders yet.
+            </p>
+
+            <a
+                href="{% url 'store:products' %}"
+                class="view-btn"
+            >
+                Start Shopping
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<footer>
+
+    © 2026 BartanCraft. All Rights Reserved.
+
+</footer>
+
+
+</body>
+
+</html>

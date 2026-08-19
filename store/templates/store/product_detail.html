@@ -1,0 +1,420 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} | BartanCraft</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            background: #111827;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f59e0b;
+        }
+
+        /* MAIN */
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .product-box {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        /* IMAGE */
+
+        .image-box {
+            width: 100%;
+            height: 450px;
+            background: #f8fafc;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .no-image {
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        /* DETAILS */
+
+        .category {
+            display: inline-block;
+            background: #fff7ed;
+            color: #ea580c;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin: 10px 0;
+        }
+
+        .description {
+            color: #64748b;
+            line-height: 1.7;
+            margin: 20px 0;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ea580c;
+            margin: 20px 0;
+        }
+
+        .stock {
+            background: #ecfdf5;
+            color: #047857;
+            padding: 12px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* BUTTON */
+
+        .add-btn {
+            width: 100%;
+            border: none;
+            background: #f59e0b;
+            color: #111827;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #d97706;
+            color: white;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #111827;
+            color: white;
+            padding: 14px;
+            border-radius: 10px;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #1f2937;
+        }
+
+        /* MESSAGES */
+
+        .messages {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .message {
+            background: #ecfdf5;
+            color: #047857;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 768px) {
+
+            .product-box {
+                grid-template-columns: 1fr;
+            }
+
+            .image-box {
+                height: 350px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            nav {
+                padding: 15px 4%;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav>
+
+    <div class="logo">
+        Bartan<span>Craft</span>
+    </div>
+
+    <div>
+
+        <a href="{% url 'store:home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'store:products' %}">
+            Products
+        </a>
+
+        <a href="{% url 'store:cart' %}">
+            🛒 Cart
+        </a>
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'store:my_orders' %}">
+                My Orders
+            </a>
+
+            <a href="{% url 'store:logout' %}">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'store:login' %}">
+                Login
+            </a>
+
+            <a href="{% url 'store:register' %}">
+                Register
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MESSAGES
+===================================================== -->
+
+{% if messages %}
+
+<div class="messages">
+
+    {% for message in messages %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+
+<!-- =====================================================
+     PRODUCT
+===================================================== -->
+
+<div class="container">
+
+    <div class="product-box">
+
+
+        <!-- PRODUCT IMAGE -->
+
+        <div class="image-box">
+
+            {% if product.image %}
+
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                >
+
+            {% else %}
+
+                <div class="no-image">
+                    No Product Image
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- PRODUCT DETAILS -->
+
+        <div>
+
+            <div class="category">
+                Kitchen Essentials
+            </div>
+
+            <h1>
+                {{ product.name }}
+            </h1>
+
+            <div class="description">
+
+                {{ product.description }}
+
+            </div>
+
+            <div class="price">
+
+                ₹{{ product.price }}
+
+            </div>
+
+
+            {% if product.stock > 0 %}
+
+                <div class="stock">
+
+                    ✓ In Stock
+                    ({{ product.stock }} available)
+
+                </div>
+
+
+                <!-- IMPORTANT: ADD TO CART -->
+
+                <form
+                    method="POST"
+                    action="{% url 'store:add_to_cart' product.id %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="add-btn"
+                    >
+
+                        🛒 Add to Cart
+
+                    </button>
+
+                </form>
+
+
+            {% else %}
+
+                <div
+                    class="stock"
+                    style="
+                        background:#fef2f2;
+                        color:#dc2626;
+                    "
+                >
+
+                    ✕ Out of Stock
+
+                </div>
+
+            {% endif %}
+
+
+            <a
+                href="{% url 'store:products' %}"
+                class="back-btn"
+            >
+
+                ← Back to Products
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

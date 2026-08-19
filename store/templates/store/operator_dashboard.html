@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Operator Dashboard - Bartan Craft</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 20px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .add-btn {
+            background: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .product-info h3 {
+            margin: 0 0 8px;
+        }
+
+        .product-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .actions a {
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .edit {
+            color: #2563eb;
+        }
+
+        .delete {
+            color: #dc2626;
+        }
+
+        .orders {
+            margin-top: 50px;
+        }
+
+        .order {
+            background: white;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<header>
+
+    <h1>🍳 Bartan Craft</h1>
+
+    <div>
+
+        <a href="/">
+            View Website
+        </a>
+        <a href="{% url 'operator_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="top">
+
+        <h2>Operator Dashboard</h2>
+
+        <a
+            href="{% url 'add_product' %}"
+            class="add-btn"
+        >
+            + Add Product
+        </a>
+
+    </div>
+
+
+    <h2>Products</h2>
+
+
+    {% for product in products %}
+
+    <div class="card">
+
+        <div class="product-info">
+
+            <h3>
+                {{ product.name }}
+            </h3>
+
+            <p>
+                Price: ₹{{ product.price }}
+            </p>
+
+            <p>
+                Stock: {{ product.stock }}
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+            <a
+                href="{% url 'edit_product' product.id %}"
+                class="edit"
+            >
+                Edit
+            </a>
+
+            <a
+                href="{% url 'delete_product' product.id %}"
+                class="delete"
+            >
+                Delete
+            </a>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p>No products available.</p>
+
+    {% endfor %}
+
+
+    <div class="orders">
+
+        <h2>Recent Orders</h2>
+
+
+        {% for order in orders %}
+
+        <div class="order">
+
+            <strong>
+                Order #{{ order.id }}
+            </strong>
+
+            <p>
+                Customer:
+                {{ order.customer_name }}
+            </p>
+
+            <p>
+                Phone:
+                {{ order.phone }}
+            </p>
+
+            <p>
+                Total:
+                ₹{{ order.total_amount }}
+            </p>
+
+        </div>
+
+        {% empty %}
+
+        <p>No orders yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
